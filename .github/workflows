@@ -1,0 +1,19 @@
+name: CI/CD
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    runs-on: [self-hosted, myServer]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          clean: true
+      - name: Install dependencies for production
+        run: npm install
+      - name: Build the app
+        if: success()
+        run: npm run build
+      - name: Restart the process
+        if: success()
+        run: pm2 reload yourProcessId
