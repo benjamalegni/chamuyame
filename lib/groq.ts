@@ -1,4 +1,5 @@
-const OLLAMA_URL = process.env.OLLAMA_URL || "http://localhost:11434";
+const GROQ_API_URL =
+  process.env.GROQ_API_URL || "https://api.groq.com/openai/v1/chat/completions";
 
 interface ChamuyarRequest {
   textoConversacion: string;
@@ -31,6 +32,11 @@ function getSystemPrompt(): string {
 export async function chamuyar(
   request: ChamuyarRequest
 ): Promise<ChamuyarResponse> {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) {
+    return { respuesta: "", error: "Falta GROQ_API_KEY en el entorno" };
+  }
+
   const tonePrompts = getTonePrompts();
   const toneInstruction = request.tono ? tonePrompts[request.tono] : "";
 
@@ -43,12 +49,13 @@ ${request.contexto ? `Contexto: ${request.contexto}` : ""}
 Respuesta:`;
 
   try {
-    const model = process.env.OLLAMA_MODEL || "llama3";
-    
-    const response = await fetch(`${OLLAMA_URL}/api/chat`, {
+    const model = process.env.GROQ_MODEL || "groq/compound-mini";
+
+    const response = await fetch(GROQ_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         model,
@@ -56,7 +63,7 @@ Respuesta:`;
           { role: "system", content: getSystemPrompt() },
           { role: "user", content: userPrompt },
         ],
-        stream: false,
+        temperature: 0.7,
       }),
     });
 
@@ -68,7 +75,7 @@ Respuesta:`;
     }
 
     const data = await response.json();
-    let respuesta = data.message?.content?.trim() || "";
+    let respuesta = data.choices?.[0]?.message?.content?.trim() || "";
 
     respuesta = respuesta.replace(/^["']|["']$/g, "").replace(/\n+$/, "");
 
