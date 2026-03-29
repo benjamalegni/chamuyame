@@ -190,7 +190,7 @@ export default function Home() {
             </h1>
           </div>
           <p className="text-sm text-muted-foreground">
-            Lleva tu chamuyo al siguiente nivel.
+            Lleva tu chamuyo al siguiente nivel
           </p>
         </motion.header>
 

@@ -133,6 +133,11 @@ export default function PromptStylesModal({
             {tonePreviews.map((tone) => {
               const isCustomized =
                 sanitizeTonePromptValue(drafts[tone.id]) !== defaultTonePrompts[tone.id];
+              const sanitizedCurrentValue = sanitizeTonePromptValue(drafts[tone.id]);
+              const sanitizedSavedValue = sanitizeTonePromptValue(
+                overrides[tone.id] || defaultTonePrompts[tone.id]
+              );
+              const hasToneUnsavedChanges = sanitizedCurrentValue !== sanitizedSavedValue;
               const isSelected = selectedTone === tone.id;
 
               return (
@@ -179,12 +184,39 @@ export default function PromptStylesModal({
                     rows={3}
                     className="min-h-28 w-full rounded-2xl border border-white/10 bg-background px-4 py-3 text-sm leading-relaxed text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary/50 disabled:cursor-not-allowed disabled:opacity-60"
                   />
+                  {hasToneUnsavedChanges && (
+                    <div className="mt-3 flex items-center justify-between gap-3">
+                      <p className="text-xs text-muted-foreground">
+                        Hay cambios sin guardar en este estilo.
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const nextOverrides = sanitizeTonePromptOverrides({
+                            ...overrides,
+                            [tone.id]: drafts[tone.id],
+                          });
+
+                          onSave(nextOverrides);
+                        }}
+                        disabled={disabled}
+                        className="rounded-xl bg-primary px-4 py-2 text-xs font-medium text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        Guardar
+                      </button>
+                    </div>
+                  )}
                 </section>
               );
             })}
           </div>
 
-          <div className="flex flex-col-reverse gap-3 border-t border-white/10 px-6 py-4 sm:flex-row sm:justify-between">
+          <div className="flex flex-col-reverse gap-3 border-t border-white/10 px-6 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs text-muted-foreground">
+              {hasUnsavedChanges
+                ? "Tenes cambios pendientes en uno o mas estilos."
+                : "Los cambios se guardan desde cada estilo editado."}
+            </p>
             <button
               type="button"
               onClick={onClose}
@@ -192,19 +224,6 @@ export default function PromptStylesModal({
             >
               Cerrar
             </button>
-            {hasUnsavedChanges && (
-              <button
-                type="button"
-                onClick={() => {
-                  onSave(sanitizeTonePromptOverrides(drafts));
-                  onClose();
-                }}
-                disabled={disabled}
-                className="rounded-xl bg-primary px-4 py-3 text-sm text-primary-foreground transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-              >
-                Guardar
-              </button>
-            )}
           </div>
         </motion.div>
       </motion.div>
