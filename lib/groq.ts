@@ -3,6 +3,7 @@ const GROQ_API_URL =
 
 import { getChamuyoExamples, formatExamplesForPrompt } from "./chamuyos-examples";
 import languageRules from "@/data/language-rules.json";
+import { defaultTonePrompts, type ToneId, type TonePromptOverrides } from "@/lib/tone-options";
 
 interface ChamuyarRequest {
   textoConversacion: string;
@@ -10,7 +11,8 @@ interface ChamuyarRequest {
   suGenero: "mujer" | "hombre";
   tema?: string;
   contexto?: string;
-  tono?: string;
+  tono?: ToneId;
+  tonePromptOverrides?: TonePromptOverrides;
 }
 
 interface ChamuyarResponse {
@@ -27,23 +29,28 @@ interface LanguageRules {
 
 const chatLanguageRules = languageRules as LanguageRules;
 
-function getTonePrompts(): Record<string, string> {
+function getTonePrompts(overrides?: TonePromptOverrides): Record<ToneId, string> {
   return {
     chamuyero_suave:
+      overrides?.chamuyero_suave ||
       process.env.TONO_CHAMUYERO_SUAVE ||
-      "Natural, liviano y con intención.",
+      defaultTonePrompts.chamuyero_suave,
     chamuyero_atrevido:
+      overrides?.chamuyero_atrevido ||
       process.env.TONO_CHAMUYERO_ATREVIDO ||
-      "Seguro y directo, sin exagerar.",
+      defaultTonePrompts.chamuyero_atrevido,
     chamuyero_picante:
+      overrides?.chamuyero_picante ||
       process.env.TONO_CHAMUYERO_PICANTE ||
-      "Picante pero creíble.",
+      defaultTonePrompts.chamuyero_picante,
     chamuyero_romantico:
+      overrides?.chamuyero_romantico ||
       process.env.TONO_CHAMUYERO_ROMANTICO ||
-      "Dulce y genuino.",
+      defaultTonePrompts.chamuyero_romantico,
     chamuyero_divertido:
+      overrides?.chamuyero_divertido ||
       process.env.TONO_CHAMUYERO_DIVERTIDO ||
-      "Con humor, pero natural.",
+      defaultTonePrompts.chamuyero_divertido,
   };
 }
 
@@ -88,7 +95,7 @@ export async function chamuyar(
     return { respuesta: "", error: "Falta GROQ_API_KEY en el entorno" };
   }
 
-  const tonePrompts = getTonePrompts();
+  const tonePrompts = getTonePrompts(request.tonePromptOverrides);
   const toneInstruction =
     request.tono && tonePrompts[request.tono]
       ? tonePrompts[request.tono]
@@ -110,6 +117,7 @@ ${languageRulesText}
 Instrucciones:
 - Tono: ${toneInstruction}
 - Que suene a WhatsApp real
+- No arranques siempre con "che"; alterna tambien con "eu", "escuchame" o entra directo segun convenga
 - No tirar un piropo aislado ni una frase espectacular porque sí
 - Responder a lo último que dijo ella
 - Si encaja, proponer tomar algo o verse de manera simple

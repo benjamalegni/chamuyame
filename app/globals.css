@@ -3,6 +3,7 @@
 /* Modo oscuro por defecto — paleta única */
 html {
   color-scheme: dark;
+  scrollbar-gutter: stable;
 }
 
 :root {

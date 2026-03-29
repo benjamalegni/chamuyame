@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { chamuyar } from "@/lib/groq";
+import { sanitizeTonePromptOverrides } from "@/lib/tone-options";
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { textoConversacion, miGenero, suGenero, tema, contexto, tono } = body;
+    const { textoConversacion, miGenero, suGenero, tema, contexto, tono, tonePromptOverrides } = body;
 
     if (!textoConversacion || typeof textoConversacion !== "string") {
       return NextResponse.json(
@@ -27,6 +28,10 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const sanitizedTonePromptOverrides = sanitizeTonePromptOverrides(
+      tonePromptOverrides
+    );
+
     const result = await chamuyar({
       textoConversacion,
       miGenero,
@@ -34,6 +39,10 @@ export async function POST(request: NextRequest) {
       tema: tema || undefined,
       contexto: contexto || undefined,
       tono,
+      tonePromptOverrides:
+        Object.keys(sanitizedTonePromptOverrides).length > 0
+          ? sanitizedTonePromptOverrides
+          : undefined,
     });
 
     if (result.error) {

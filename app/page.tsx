@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import ImageUploader from "@/components/image/ImageUploader";
@@ -9,9 +9,15 @@ import GenderSelector from "@/components/promptOptions/GenderSelector";
 import TopicInput from "@/components/promptOptions/TopicInput";
 import ContextInput from "@/components/promptOptions/ContextInput";
 import ToneSelector from "@/components/promptOptions/ToneSelector";
+import PromptStylesModal from "@/components/promptOptions/PromptStylesModal";
 import ResponseCard from "@/components/ResponseCard";
 import GradientButton from "@/components/ui/GradientButton";
 import { useOCR } from "@/hooks/useOCR";
+import {
+  sanitizeTonePromptOverrides,
+  type ToneId,
+  type TonePromptOverrides,
+} from "@/lib/tone-options";
 
 type AppState = "idle" | "ready" | "processing" | "result";
 
@@ -23,13 +29,40 @@ export default function Home() {
   const [theirGender, setTheirGender] = useState<"mujer" | "hombre" | null>(null);
   const [topic, setTopic] = useState<string>("");
   const [context, setContext] = useState<string>("");
-  const [selectedTone, setSelectedTone] = useState<string | null>(null);
+  const [selectedTone, setSelectedTone] = useState<ToneId | null>(null);
+  const [tonePromptOverrides, setTonePromptOverrides] = useState<TonePromptOverrides>({});
+  const [showPromptStylesModal, setShowPromptStylesModal] = useState(false);
   const [response, setResponse] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [showImageUploader, setShowImageUploader] = useState<boolean>(true);
   const [showWarning, setShowWarning] = useState<boolean>(false);
 
   const { extractText, isProcessing: isOCRProcessing } = useOCR();
+
+  useEffect(() => {
+    try {
+      const storedOverrides = window.localStorage.getItem("tone-prompt-overrides");
+
+      if (storedOverrides) {
+        setTonePromptOverrides(sanitizeTonePromptOverrides(JSON.parse(storedOverrides)));
+      }
+    } catch {
+      window.localStorage.removeItem("tone-prompt-overrides");
+    }
+  }, []);
+
+  const handleSaveTonePromptOverrides = useCallback(
+    (nextOverrides: TonePromptOverrides) => {
+      const sanitizedOverrides = sanitizeTonePromptOverrides(nextOverrides);
+
+      setTonePromptOverrides(sanitizedOverrides);
+      window.localStorage.setItem(
+        "tone-prompt-overrides",
+        JSON.stringify(sanitizedOverrides)
+      );
+    },
+    []
+  );
 
   const handleImageSelected = useCallback(
     async (file: File | null) => {
@@ -91,6 +124,7 @@ export default function Home() {
           tema: topic,
           contexto: context,
           tono: selectedTone,
+          tonePromptOverrides,
         }),
       });
 
@@ -106,7 +140,15 @@ export default function Home() {
       setError(err instanceof Error ? err.message : "Error desconocido");
       setState("result");
     }
-  }, [chatText, myGender, theirGender, topic, context, selectedTone]);
+  }, [
+    chatText,
+    myGender,
+    theirGender,
+    topic,
+    context,
+    selectedTone,
+    tonePromptOverrides,
+  ]);
 
   const handleRegenerate = useCallback(() => {
     handleChamuyar();
@@ -148,7 +190,7 @@ export default function Home() {
             </h1>
           </div>
           <p className="text-sm text-muted-foreground">
-            Lleva tu chamuyo al next level.
+            Lleva tu chamuyo al siguiente nivel.
           </p>
         </motion.header>
 
@@ -244,8 +286,14 @@ export default function Home() {
                       <ToneSelector
                         selected={selectedTone}
                         onSelect={setSelectedTone}
-                        disabled={state === "processing" || state === "result"}
+                        onOpenDetails={() => setShowPromptStylesModal(true)}
+                        disabled={state === "processing"}
                       />
+                      {state === "result" && (
+                        <p className="text-xs text-muted-foreground">
+                          Podes cambiar el estilo y tocar `Otra` para regenerar sin arrancar de nuevo.
+                        </p>
+                      )}
                     </div>
 
                     {error && (
@@ -291,6 +339,17 @@ export default function Home() {
             )}
           </AnimatePresence>
         </div>
+
+        {showPromptStylesModal && (
+          <PromptStylesModal
+            open={showPromptStylesModal}
+            onClose={() => setShowPromptStylesModal(false)}
+            selectedTone={selectedTone}
+            overrides={tonePromptOverrides}
+            onSave={handleSaveTonePromptOverrides}
+            disabled={state === "processing"}
+          />
+        )}
 
         <motion.footer
           initial={{ opacity: 0 }}
