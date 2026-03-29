@@ -5,7 +5,7 @@
 
 import chamuyosData from "@/data/chamuyos.json";
 
-export type Genero = "varon" | "mujer" | "neutro";
+export type Genero = "hombre" | "mujer" | "neutro";
 
 export interface ChamuyoExample {
   chamuyo: string;
@@ -22,8 +22,8 @@ export const chamuyosExamples: ChamuyoExample[] = chamuyosData.chamuyos as Chamu
  */
 export function getChamuyoExamples(
   categoria?: "suave" | "atrevido" | "picante" | "romantico" | "divertido",
-  generoEmisor?: "varon" | "mujer",
-  generoDestinatario?: "varon" | "mujer",
+  generoEmisor?: "hombre" | "mujer",
+  generoDestinatario?: "hombre" | "mujer",
   limit: number = 3
 ): ChamuyoExample[] {
   let filtered = chamuyosExamples;
@@ -59,7 +59,7 @@ export function getChamuyoExamples(
 export function formatExamplesForPrompt(examples: ChamuyoExample[]): string {
   if (examples.length === 0) return "";
 
-  return `Ejemplos:\n${examples
-    .map((e, i) => `${i + 1}. "${e.chamuyo}"`)
+  return `EJEMPLOS (copiá este estilo):\n${examples
+    .map((e, i) => `${i + 1}. ${e.chamuyo}`)
     .join("\n")}`;
 }

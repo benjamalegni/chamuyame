@@ -68,8 +68,8 @@ body {
   inset: 0;
   border-radius: 0.5rem; /* rounded-lg */
   padding: 1.5px;
-  background: linear-gradient(
-    90deg,
+  background: conic-gradient(
+    from var(--gradient-angle, 0deg),
     #06b6d4,
     #3b82f6,
     #8b5cf6,
@@ -77,28 +77,31 @@ body {
     #f97316,
     #06b6d4
   );
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
+   -webkit-mask: 
+     linear-gradient(#fff 0 0) content-box, 
+     linear-gradient(#fff 0 0);
+   -webkit-mask-composite: xor;
+   mask-composite: exclude;
+   pointer-events: none;
+   will-change: background;
 }
 
 /* Animación del gradiente rotando */
+@property --gradient-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 @keyframes gradient-rotate {
   0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
+    --gradient-angle: 0deg;
   }
   100% {
-    background-position: 0% 50%;
+    --gradient-angle: 360deg;
   }
 }
 
-.animate-gradient-rotate {
-  background-size: 300% 300%;
-  animation: gradient-rotate 4s ease-in-out infinite;
+.gradient-border-button-animated::before {
+  animation: gradient-rotate 3.5s linear infinite;
 }

@@ -3,16 +3,26 @@
 import { motion } from "framer-motion";
 
 interface GenderSelectorProps {
-  myGender: "mujer" | "varon" | null;
-  theirGender: "mujer" | "varon" | null;
-  onSelectMyGender: (gender: "mujer" | "varon") => void;
-  onSelectTheirGender: (gender: "mujer" | "varon") => void;
+  myGender: "mujer" | "hombre" | null;
+  theirGender: "mujer" | "hombre" | null;
+  onSelectMyGender: (gender: "mujer" | "hombre") => void;
+  onSelectTheirGender: (gender: "mujer" | "hombre") => void;
   disabled?: boolean;
 }
 
 const genders = [
-  { id: "mujer" as const, label: "Mujer" },
-  { id: "varon" as const, label: "Varón" },
+  {
+    id: "mujer" as const,
+    label: "Mujer",
+    selectedClassName:
+      "bg-pink-500 text-white shadow-[0_0_24px_rgba(236,72,153,0.25)]",
+  },
+  {
+    id: "hombre" as const,
+    label: "Hombre",
+    selectedClassName:
+      "bg-blue-500 text-white shadow-[0_0_24px_rgba(59,130,246,0.25)]",
+  },
 ];
 
 export default function GenderSelector({
@@ -44,7 +54,7 @@ export default function GenderSelector({
               disabled={disabled}
               className={`flex-1 rounded-lg px-6 py-3 text-sm font-medium transition-all ${
                 myGender === gender.id
-                  ? "bg-primary text-primary-foreground"
+                  ? gender.selectedClassName
                   : "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
               } ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
             >
@@ -74,7 +84,7 @@ export default function GenderSelector({
               disabled={disabled}
               className={`flex-1 rounded-lg px-6 py-3 text-sm font-medium transition-all ${
                 theirGender === gender.id
-                  ? "bg-primary text-primary-foreground"
+                  ? gender.selectedClassName
                   : "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
               } ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
             >

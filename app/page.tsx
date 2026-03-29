@@ -19,8 +19,8 @@ export default function Home() {
   const [state, setState] = useState<AppState>("idle");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [chatText, setChatText] = useState<string>("");
-  const [myGender, setMyGender] = useState<"mujer" | "varon" | null>(null);
-  const [theirGender, setTheirGender] = useState<"mujer" | "varon" | null>(null);
+  const [myGender, setMyGender] = useState<"mujer" | "hombre" | null>(null);
+  const [theirGender, setTheirGender] = useState<"mujer" | "hombre" | null>(null);
   const [topic, setTopic] = useState<string>("");
   const [context, setContext] = useState<string>("");
   const [selectedTone, setSelectedTone] = useState<string | null>(null);
@@ -148,7 +148,7 @@ export default function Home() {
             </h1>
           </div>
           <p className="text-sm text-muted-foreground">
-            Pegá la conversación o subi un screenshot del chat
+            Lleva tu chamuyo al next level.
           </p>
         </motion.header>
 

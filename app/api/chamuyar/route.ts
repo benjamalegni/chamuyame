@@ -13,16 +13,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!miGenero || (miGenero !== "mujer" && miGenero !== "varon")) {
+    if (!miGenero || (miGenero !== "mujer" && miGenero !== "hombre")) {
       return NextResponse.json(
-        { error: "miGenero es requerido (mujer o varon)" },
+        { error: "miGenero es requerido (mujer o hombre)" },
         { status: 400 }
       );
     }
 
-    if (!suGenero || (suGenero !== "mujer" && suGenero !== "varon")) {
+    if (!suGenero || (suGenero !== "mujer" && suGenero !== "hombre")) {
       return NextResponse.json(
-        { error: "suGenero es requerido (mujer o varon)" },
+        { error: "suGenero es requerido (mujer o hombre)" },
         { status: 400 }
       );
     }

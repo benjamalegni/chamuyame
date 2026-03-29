@@ -27,7 +27,7 @@
     {
       "chamuyo": "Como dijo Homero, sos la cáscara de mi banana",
       "categoria": "suave",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -111,7 +111,7 @@
     {
       "chamuyo": "Mira cómo me ponés",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -123,7 +123,7 @@
     {
       "chamuyo": "¿Dónde tengo que ir a votar para que me gobiernes, mamacita?",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -135,13 +135,13 @@
     {
       "chamuyo": "Te besaría bajo la lluvia pero te mojarías dos veces",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Te mandaría una foto con esta lluvia, pero no quiero que te mojes dos veces",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -153,31 +153,31 @@
     {
       "chamuyo": "Ya tengo la jaula para ese pajarito",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Me dejás el amigo más duro que turrón en oferta",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Quién fuera bombero para agarrarte la manguera",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "¿Esa burra tiene alarma? Porque me despertó el nene",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Tus ojos son dos cerezas, tus mejillas dos manzanas, qué linda ensalada de fruta haríamos con mi banana",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -189,7 +189,7 @@
     {
       "chamuyo": "Ojalá fuera mecánico para meter mano en esa máquina",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -201,7 +201,7 @@
     {
       "chamuyo": "Quisiera que fueras café para cortarte con esta lechita",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -213,7 +213,7 @@
     {
       "chamuyo": "Cuando te veo, babeo por donde meo",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "neutro"
     },
     {
@@ -225,7 +225,7 @@
     {
       "chamuyo": "¿Buscás el tocador? Porque ese soy yo",
       "categoria": "atrevido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -238,31 +238,31 @@
       "chamuyo": "Chiquiiiiito, tanto calor y vos con manguera",
       "categoria": "atrevido",
       "genero_emisor": "mujer",
-      "genero_destinatario": "varon"
+      "genero_destinatario": "hombre"
     },
     {
       "chamuyo": "En el cielo las estrellas, en el campo el ombú y en la sanja de tu culo toma agua mi ñandú",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Quisiera ser piso para verte el paraíso",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "No soy cotillón pero te doy matraca",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "¿Sabías que soy maga? Me das una manguera y la convierto en espada",
       "categoria": "picante",
       "genero_emisor": "mujer",
-      "genero_destinatario": "varon"
+      "genero_destinatario": "hombre"
     },
     {
       "chamuyo": "Quisiera ser tu dedo chiquito del pie para darte contra todos los muebles",
@@ -273,13 +273,13 @@
     {
       "chamuyo": "Con la leche que cargo si no te hago un hijo te hago un queso",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "¿Sos el arco rival? Porque quiero meterte mis pelotas",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -297,25 +297,25 @@
     {
       "chamuyo": "El veneno de la araña mata la lagartija, qué veneno tendrá tu concha que me acalambra la pija",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Me gustaría ser tanga para ver esa baldosa hermosa",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "No podría bajarte el sol porque me quemaría como una antorcha, mejor te bajo la tanga y te chupo concha",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Me pondría whisky en la punta de la pija para emborracharte el culo",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -328,24 +328,24 @@
       "chamuyo": "Que el amor sea una constante lucha entre tus huevos y mi cachucha",
       "categoria": "picante",
       "genero_emisor": "mujer",
-      "genero_destinatario": "varon"
+      "genero_destinatario": "hombre"
     },
     {
       "chamuyo": "Quisiera ser hamburguesa para tragarme tu mayonesa",
       "categoria": "picante",
       "genero_emisor": "mujer",
-      "genero_destinatario": "varon"
+      "genero_destinatario": "hombre"
     },
     {
       "chamuyo": "El pingo se me murió y mis huevos están de luto. Abrí las piernas, mamita, para enterrarte al difunto",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Quisiera ser pirata no por el oro o la plata, sino por el gran tesoro que tenés entre las patas",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -357,13 +357,13 @@
     {
       "chamuyo": "Mi corazón late late, si me tirás la goma te regalo un chocolate",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Hoy en la mañana me eché un baño polaco, el olor a cebolla se quitó de mi sobaco. Y aunque me pase altas veces jabón verde, no se me quita todo lo sucio que quiero hacerte",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -375,25 +375,25 @@
     {
       "chamuyo": "Como me gustaría ser baldosa para chuparte la concha",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Quisiera ser luna, quisiera ser lucero, pero lo que más deseo es que me dejes rojo el agujero",
       "categoria": "picante",
       "genero_emisor": "mujer",
-      "genero_destinatario": "varon"
+      "genero_destinatario": "hombre"
     },
     {
       "chamuyo": "Como quisiera ser baldosa para ver toda esa cosa",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
       "chamuyo": "Te bajaría el sol, pero me quemaría como una antorcha. Mejor te bajo la tanga y te chupo bien la concha",
       "categoria": "picante",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
       "genero_destinatario": "mujer"
     },
     {
@@ -424,12 +424,78 @@
       "chamuyo": "Conmigo sos más áspero que pete de gato, dame bola porfa",
       "categoria": "divertido",
       "genero_emisor": "mujer",
-      "genero_destinatario": "varon"
+      "genero_destinatario": "hombre"
     },
     {
       "chamuyo": "Hola linda, yo juego al Fortnite re piola",
       "categoria": "divertido",
-      "genero_emisor": "varon",
+      "genero_emisor": "hombre",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Kerescojer",
+      "categoria": "picante",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Si así está el conejo, cómo estará la zanahoria",
+      "categoria": "picante",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "hombre"
+    },
+    {
+      "chamuyo": "En el cielo las estrellas, en el campo el alambrado y en la sanja de tu culo mi chorizo colorado",
+      "categoria": "picante",
+      "genero_emisor": "hombre",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "En el cielo las estrellas, en el campo los arados y en el medio de tu culo mi chorizo colorado",
+      "categoria": "picante",
+      "genero_emisor": "hombre",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Si tu culo tuviera dientes y mordiera con firmeza, cuántas chotas por el mundo andarían sin cabeza",
+      "categoria": "picante",
+      "genero_emisor": "hombre",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Estás más buena que el potaje de mi abuela",
+      "categoria": "atrevido",
+      "genero_emisor": "hombre",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Si tu pierna izquierda es Navidad y la derecha Año Nuevo, puedo pasar entre las fiestas?",
+      "categoria": "atrevido",
+      "genero_emisor": "hombre",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Estás más fuerte que cachetada de Transformers",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Si fueses helado te comería hasta el palo",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "No soy licuadora pero te dejo el flujo punto nieve",
+      "categoria": "picante",
+      "genero_emisor": "hombre",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Quién fuera burguesía para oprimir esas masas",
+      "categoria": "divertido",
+      "genero_emisor": "neutro",
       "genero_destinatario": "mujer"
     }
   ]

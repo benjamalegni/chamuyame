@@ -2,11 +2,12 @@ const GROQ_API_URL =
   process.env.GROQ_API_URL || "https://api.groq.com/openai/v1/chat/completions";
 
 import { getChamuyoExamples, formatExamplesForPrompt } from "./chamuyos-examples";
+import languageRules from "@/data/language-rules.json";
 
 interface ChamuyarRequest {
   textoConversacion: string;
-  miGenero: "mujer" | "varon";
-  suGenero: "mujer" | "varon";
+  miGenero: "mujer" | "hombre";
+  suGenero: "mujer" | "hombre";
   tema?: string;
   contexto?: string;
   tono?: string;
@@ -17,30 +18,57 @@ interface ChamuyarResponse {
   error?: string;
 }
 
+interface LanguageRules {
+  modismos_preferidos: string[];
+  frases_prohibidas: string[];
+  estilo_buscado: string[];
+  ejemplos_de_direccion: string[];
+}
+
+const chatLanguageRules = languageRules as LanguageRules;
+
 function getTonePrompts(): Record<string, string> {
   return {
     chamuyero_suave:
       process.env.TONO_CHAMUYERO_SUAVE ||
-      "Cálido pero esquivo. Intriga sutil.",
+      "Natural, liviano y con intención.",
     chamuyero_atrevido:
       process.env.TONO_CHAMUYERO_ATREVIDO ||
-      "Directo pero desafiante. Que te gane.",
+      "Seguro y directo, sin exagerar.",
     chamuyero_picante:
       process.env.TONO_CHAMUYERO_PICANTE ||
-      "Intenso pero no rogando. Confianza.",
+      "Picante pero creíble.",
     chamuyero_romantico:
       process.env.TONO_CHAMUYERO_ROMANTICO ||
-      "Dulce pero misterioso. No todo dado.",
+      "Dulce y genuino.",
     chamuyero_divertido:
       process.env.TONO_CHAMUYERO_DIVERTIDO ||
-      "Divertido pero inalcanzable. Juego.",
+      "Con humor, pero natural.",
   };
 }
 
 function getSystemPrompt(): string {
   return (
     process.env.SYSTEM_PROMPT ||
-    "Generás respuestas para chats en argentino. Con actitud pero sin mostrarte demasiado interesado. Creá intriga, dejá con ganas de más. Buscando verse naturalmente pero sin desesperación. Seguí el estilo de los ejemplos. Máximo 2 oraciones. Voseo. Sin emojis."
+    "Escribí como un pibe argentino normal que sabe chamuyar. Soná natural, concreto y seguro. No uses frases raras, grandilocuentes, neutras ni de vendedor. No hagas promesas, retos ni metáforas boludas. Basate primero en la conversación real y usá los ejemplos solo para tomar tono y actitud. Si hay lugar, llevá la charla a verse o tomar algo de forma simple y natural. Voseo argentino. Sin emojis. Una o dos oraciones cortas."
+  );
+}
+
+function formatLanguageRules(): string {
+  return `Reglas de lenguaje:
+- Modismos a priorizar: ${chatLanguageRules.modismos_preferidos.join(", ")}
+- Frases prohibidas: ${chatLanguageRules.frases_prohibidas.join(", ")}
+- Estilo buscado:
+${chatLanguageRules.estilo_buscado.map((rule) => `  - ${rule}`).join("\n")}
+- Ejemplos de dirección correcta:
+${chatLanguageRules.ejemplos_de_direccion.map((example) => `  - ${example}`).join("\n")}`;
+}
+
+function containsForbiddenPhrase(text: string): boolean {
+  const normalized = text.toLowerCase();
+
+  return chatLanguageRules.frases_prohibidas.some((phrase) =>
+    normalized.includes(phrase.toLowerCase())
   );
 }
 
@@ -70,17 +98,21 @@ export async function chamuyar(
   const tonoKey = request.tono?.replace("chamuyero_", "") as "suave" | "atrevido" | "picante" | "romantico" | "divertido" | undefined;
   const examples = getChamuyoExamples(tonoKey, request.miGenero, request.suGenero, 3);
   const examplesText = formatExamplesForPrompt(examples);
+  const languageRulesText = formatLanguageRules();
   
   const userPrompt = `Conversación:
 ${request.textoConversacion}
 
 ${examplesText}
 
-Tono: ${toneInstruction}
-Usuario: ${request.miGenero}
-Destinatario: ${request.suGenero}
-${request.tema ? `Tema: ${request.tema}` : ""}
-${request.contexto ? `Nota: ${request.contexto}` : ""}
+${languageRulesText}
+
+Instrucciones:
+- Tono: ${toneInstruction}
+- Que suene a WhatsApp real
+- No tirar un piropo aislado ni una frase espectacular porque sí
+- Responder a lo último que dijo ella
+- Si encaja, proponer tomar algo o verse de manera simple
 
 Respuesta:`;
 
@@ -100,8 +132,8 @@ Respuesta:`;
           { role: "system", content: getSystemPrompt() },
           { role: "user", content: userPrompt },
         ],
-        temperature: 0.7,
-        max_tokens: 60,
+        temperature: 0.55,
+        max_tokens: 36,
       }),
     });
 
@@ -116,6 +148,47 @@ Respuesta:`;
     let respuesta = data.choices?.[0]?.message?.content?.trim() || "";
 
     respuesta = respuesta.replace(/^["']|["']$/g, "").replace(/\n+$/, "");
+
+    if (respuesta && containsForbiddenPhrase(respuesta)) {
+      const rewritePrompt = `Reescribí este mensaje para que suene más argentino, natural y de WhatsApp real.
+
+Mensaje actual:
+${respuesta}
+
+Condiciones:
+- No uses ninguna de estas frases: ${chatLanguageRules.frases_prohibidas.join(", ")}
+- Si da pie, orientalo a tomar algo o verse de forma simple
+- Mantenelo corto, concreto y natural
+- Sin emojis
+
+Reescritura:`;
+
+      const rewriteResponse = await fetch(GROQ_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model,
+          messages: [
+            { role: "system", content: getSystemPrompt() },
+            { role: "user", content: rewritePrompt },
+          ],
+          temperature: 0.35,
+          max_tokens: 36,
+        }),
+      });
+
+      if (rewriteResponse.ok) {
+        const rewriteData = await rewriteResponse.json();
+        const rewritten = rewriteData.choices?.[0]?.message?.content?.trim() || "";
+
+        if (rewritten && !containsForbiddenPhrase(rewritten)) {
+          respuesta = rewritten.replace(/^["']|["']$/g, "").replace(/\n+$/, "");
+        }
+      }
+    }
 
     return { respuesta };
   } catch (error) {

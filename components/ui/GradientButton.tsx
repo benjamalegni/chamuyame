@@ -27,7 +27,7 @@ export default function GradientButton({
           text-lg font-medium text-foreground
           transition-all duration-300
           disabled:cursor-not-allowed disabled:opacity-50
-          ${disabled ? "" : "before:animate-gradient-rotate"}
+          ${disabled ? "" : "gradient-border-button-animated"}
           ${className}
         `}
         style={{
