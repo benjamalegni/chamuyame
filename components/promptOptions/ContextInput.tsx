@@ -25,7 +25,7 @@ export default function ContextInput({
         onChange={(e) => onChange(e.target.value)}
         disabled={disabled}
         placeholder="Agrega contexto (opcional). Ej: es mi flaca, es el jefe..."
-        className="w-full bg-white rounded-lg p-4 border border-gray-200 text-sm text-gray-800 placeholder-gray-400 resize-none h-20 focus:outline-none focus:border-black focus:ring-0 transition-colors disabled:opacity-50 disabled:bg-gray-50"
+        className="h-20 w-full resize-none rounded-lg border border-border bg-input p-4 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-border focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50"
       />
     </motion.div>
   );

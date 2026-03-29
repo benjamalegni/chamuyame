@@ -9,11 +9,11 @@ interface ToneSelectorProps {
 }
 
 const tones = [
-  { id: "casual", label: "Casual" },
-  { id: "formal", label: "Formal" },
-  { id: "divertido", label: "Divertido" },
-  { id: "serio", label: "Serio" },
-  { id: "atrevido", label: "Atrevido" },
+  { id: "chamuyero_suave", label: "Suave" },
+  { id: "chamuyero_atrevido", label: "Atrevido" },
+  { id: "chamuyero_picante", label: "Picante" },
+  { id: "chamuyero_romantico", label: "Romántico" },
+  { id: "chamuyero_divertido", label: "Divertido" },
 ];
 
 export default function ToneSelector({
@@ -35,11 +35,11 @@ export default function ToneSelector({
           whileTap={{ scale: 0.98 }}
           onClick={() => onSelect(tone.id)}
           disabled={disabled}
-          className={`px-4 py-2 rounded-full text-xs font-medium transition-all ${
+          className={`rounded-full px-4 py-2 text-xs font-medium transition-all ${
             selected === tone.id
-              ? "bg-black text-white"
-              : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-          } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+              ? "bg-primary text-primary-foreground"
+              : "bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+          } ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
         >
           {tone.label}
         </motion.button>

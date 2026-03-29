@@ -1,0 +1,436 @@
+{
+  "chamuyos": [
+    {
+      "chamuyo": "Soy celíaca pero con vos me tomaría una birra",
+      "categoria": "suave",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Me calentás más que sol de verano",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "¿Para qué fumarme un porro si cuando te veo quedo re loco?",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Sos el marolio que le da sabor a mi vida",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Como dijo Homero, sos la cáscara de mi banana",
+      "categoria": "suave",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Sos la yerba de mi mate",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Quién fuera ese espejo para verte 24/7",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Hola, ¿tenés un diccionario? Porque cuando te vi me quedé sin palabras",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "¿Sos lluvia? Porque estoy toda mojada",
+      "categoria": "suave",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Estás como mango en solar ajeno",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Oye, ¿no te cansas de andar por mis pensamientos, bebé?",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Si ser sexy fuese un delito, te pasarías la vida en la cárcel",
+      "categoria": "suave",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Estás más fuerte que meada de zorrino",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "¿Dónde tenés el botón de volumen? Porque estás re fuerte",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Te doy más que Marx a la plusvalía",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "No seré músico, pero te tocaría una banda",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Ese pan dulce pide noche buena",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Traé un tupper porque te voy a dar hasta para llevar",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Mira cómo me ponés",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Quisiera ser papa frita para acompañar ese lomo",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "¿Dónde tengo que ir a votar para que me gobiernes, mamacita?",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Estás más fuerte que mordida de epiléptico",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Te besaría bajo la lluvia pero te mojarías dos veces",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Te mandaría una foto con esta lluvia, pero no quiero que te mojes dos veces",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Mi amor, quién fuera cemento para sostener ese monumento",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Ya tengo la jaula para ese pajarito",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Me dejás el amigo más duro que turrón en oferta",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Quién fuera bombero para agarrarte la manguera",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "¿Esa burra tiene alarma? Porque me despertó el nene",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Tus ojos son dos cerezas, tus mejillas dos manzanas, qué linda ensalada de fruta haríamos con mi banana",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Quisiera ser caramelo para derretirme en tu boca",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Ojalá fuera mecánico para meter mano en esa máquina",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Ojalá fuera pimienta para acompañar ese lomo",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Quisiera que fueras café para cortarte con esta lechita",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "En mi mente ya te hice el amor 3 veces",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Cuando te veo, babeo por donde meo",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Te entro como peronista al choripán",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "¿Buscás el tocador? Porque ese soy yo",
+      "categoria": "atrevido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Estás más fuerte que televisor de geriátrico",
+      "categoria": "atrevido",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Chiquiiiiito, tanto calor y vos con manguera",
+      "categoria": "atrevido",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "varon"
+    },
+    {
+      "chamuyo": "En el cielo las estrellas, en el campo el ombú y en la sanja de tu culo toma agua mi ñandú",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Quisiera ser piso para verte el paraíso",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "No soy cotillón pero te doy matraca",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "¿Sabías que soy maga? Me das una manguera y la convierto en espada",
+      "categoria": "picante",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "varon"
+    },
+    {
+      "chamuyo": "Quisiera ser tu dedo chiquito del pie para darte contra todos los muebles",
+      "categoria": "picante",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Con la leche que cargo si no te hago un hijo te hago un queso",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "¿Sos el arco rival? Porque quiero meterte mis pelotas",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Con ese ojete cagás Ferrero Rocher",
+      "categoria": "picante",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Con ese culo cagame en el ojo y decime pirata de mierda",
+      "categoria": "picante",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "El veneno de la araña mata la lagartija, qué veneno tendrá tu concha que me acalambra la pija",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Me gustaría ser tanga para ver esa baldosa hermosa",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "No podría bajarte el sol porque me quemaría como una antorcha, mejor te bajo la tanga y te chupo concha",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Me pondría whisky en la punta de la pija para emborracharte el culo",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Si nos queremos y nos amamos, ¿por qué no nos damos por donde meamos?",
+      "categoria": "picante",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Que el amor sea una constante lucha entre tus huevos y mi cachucha",
+      "categoria": "picante",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "varon"
+    },
+    {
+      "chamuyo": "Quisiera ser hamburguesa para tragarme tu mayonesa",
+      "categoria": "picante",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "varon"
+    },
+    {
+      "chamuyo": "El pingo se me murió y mis huevos están de luto. Abrí las piernas, mamita, para enterrarte al difunto",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Quisiera ser pirata no por el oro o la plata, sino por el gran tesoro que tenés entre las patas",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Me gustaría que seas Boca y yo River para garcharte cada vez que te encuentre",
+      "categoria": "picante",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Mi corazón late late, si me tirás la goma te regalo un chocolate",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Hoy en la mañana me eché un baño polaco, el olor a cebolla se quitó de mi sobaco. Y aunque me pase altas veces jabón verde, no se me quita todo lo sucio que quiero hacerte",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Te rompería el orto bajo la luz de la luna",
+      "categoria": "picante",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Como me gustaría ser baldosa para chuparte la concha",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Quisiera ser luna, quisiera ser lucero, pero lo que más deseo es que me dejes rojo el agujero",
+      "categoria": "picante",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "varon"
+    },
+    {
+      "chamuyo": "Como quisiera ser baldosa para ver toda esa cosa",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Te bajaría el sol, pero me quemaría como una antorcha. Mejor te bajo la tanga y te chupo bien la concha",
+      "categoria": "picante",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    },
+    {
+      "chamuyo": "Aunque por tu corazón han pasado muchas personas, me gustaría que me hicieses un huequecito eterno, por pequeño que sea, para que no me olvides jamás",
+      "categoria": "romantico",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Bendito sea el dinosaurio que murió y se transformó en el petróleo que utilizó el camión que transportó al árbol cuya madera se transformó en la cama en la cual tus progenitores decidieron concebirte, corazón",
+      "categoria": "romantico",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Cada día que pasa y Dios sigue sin darse cuenta del ángel que se le escapó del cielo",
+      "categoria": "romantico",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Si ser sexy fuese un delito, te pasarías la vida en la cárcel",
+      "categoria": "romantico",
+      "genero_emisor": "neutro",
+      "genero_destinatario": "neutro"
+    },
+    {
+      "chamuyo": "Conmigo sos más áspero que pete de gato, dame bola porfa",
+      "categoria": "divertido",
+      "genero_emisor": "mujer",
+      "genero_destinatario": "varon"
+    },
+    {
+      "chamuyo": "Hola linda, yo juego al Fortnite re piola",
+      "categoria": "divertido",
+      "genero_emisor": "varon",
+      "genero_destinatario": "mujer"
+    }
+  ]
+}

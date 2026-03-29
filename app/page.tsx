@@ -1,25 +1,33 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion";
 import { MessageCircle } from "lucide-react";
-import ImageUploader from "@/components/ImageUploader";
-import TextPreview from "@/components/TextPreview";
-import ContextInput from "@/components/ContextInput";
-import ToneSelector from "@/components/ToneSelector";
+import ImageUploader from "@/components/image/ImageUploader";
+import ChatInput from "@/components/chat/ChatInput";
+import GenderSelector from "@/components/promptOptions/GenderSelector";
+import TopicInput from "@/components/promptOptions/TopicInput";
+import ContextInput from "@/components/promptOptions/ContextInput";
+import ToneSelector from "@/components/promptOptions/ToneSelector";
 import ResponseCard from "@/components/ResponseCard";
+import GradientButton from "@/components/ui/GradientButton";
 import { useOCR } from "@/hooks/useOCR";
 
-type AppState = "idle" | "image-selected" | "processing" | "result";
+type AppState = "idle" | "ready" | "processing" | "result";
 
 export default function Home() {
   const [state, setState] = useState<AppState>("idle");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [extractedText, setExtractedText] = useState<string>("");
+  const [chatText, setChatText] = useState<string>("");
+  const [myGender, setMyGender] = useState<"mujer" | "varon" | null>(null);
+  const [theirGender, setTheirGender] = useState<"mujer" | "varon" | null>(null);
+  const [topic, setTopic] = useState<string>("");
   const [context, setContext] = useState<string>("");
   const [selectedTone, setSelectedTone] = useState<string | null>(null);
   const [response, setResponse] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const [showImageUploader, setShowImageUploader] = useState<boolean>(true);
+  const [showWarning, setShowWarning] = useState<boolean>(false);
 
   const { extractText, isProcessing: isOCRProcessing } = useOCR();
 
@@ -27,8 +35,7 @@ export default function Home() {
     async (file: File | null) => {
       if (!file) {
         setSelectedImage(null);
-        setExtractedText("");
-        setState("idle");
+        setShowWarning(false);
         return;
       }
 
@@ -36,18 +43,38 @@ export default function Home() {
       reader.onload = async (e) => {
         const dataUrl = e.target?.result as string;
         setSelectedImage(dataUrl);
-        setState("image-selected");
 
         const text = await extractText(dataUrl);
-        setExtractedText(text);
+        setChatText(text);
+        if (text) {
+          setState("ready");
+          setShowImageUploader(false);
+          setShowWarning(true);
+        }
       };
       reader.readAsDataURL(file);
     },
     [extractText]
   );
 
+  const handleChatTextChange = useCallback((text: string) => {
+    setChatText(text);
+    setState((prev) => {
+      if (text && prev === "idle") {
+        setShowImageUploader(false);
+        return "ready";
+      }
+      if (!text && !selectedImage) {
+        setShowImageUploader(true);
+        setShowWarning(false);
+        return "idle";
+      }
+      return prev;
+    });
+  }, [selectedImage]);
+
   const handleChamuyar = useCallback(async () => {
-    if (!extractedText) return;
+    if (!chatText || !myGender || !theirGender) return;
 
     setState("processing");
     setResponse("");
@@ -58,7 +85,10 @@ export default function Home() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          textoConversacion: extractedText,
+          textoConversacion: chatText,
+          miGenero: myGender,
+          suGenero: theirGender,
+          tema: topic,
           contexto: context,
           tono: selectedTone,
         }),
@@ -76,7 +106,7 @@ export default function Home() {
       setError(err instanceof Error ? err.message : "Error desconocido");
       setState("result");
     }
-  }, [extractedText, context, selectedTone]);
+  }, [chatText, myGender, theirGender, topic, context, selectedTone]);
 
   const handleRegenerate = useCallback(() => {
     handleChamuyar();
@@ -84,12 +114,17 @@ export default function Home() {
 
   const handleReset = useCallback(() => {
     setSelectedImage(null);
-    setExtractedText("");
+    setChatText("");
+    setMyGender(null);
+    setTheirGender(null);
+    setTopic("");
     setContext("");
     setSelectedTone(null);
     setResponse("");
     setError(null);
     setState("idle");
+    setShowImageUploader(true);
+    setShowWarning(false);
   }, []);
 
   const handleCopy = useCallback(() => {
@@ -97,80 +132,139 @@ export default function Home() {
   }, [response]);
 
   return (
-    <main className="min-h-screen bg-white">
-      <div className="max-w-md mx-auto px-5 py-12 sm:py-16">
+    <main className="min-h-screen w-full bg-background">
+      <div className="mx-auto w-full max-w-2xl py-12 sm:py-16">
         <motion.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="mb-10"
         >
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-8 h-8 rounded-lg bg-black flex items-center justify-center">
-              <MessageCircle className="w-4 h-4 text-white" />
+          <div className="mb-2 flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center">
+              <MessageCircle className="h-8 w-8 text-primary" />
             </div>
-            <h1 className="text-2xl font-sem tracking-tight text-gray-900">
+            <h1 className="text-3xl font-sem tracking-tight text-foreground underline decoration-primary decoration-2 underline-offset-4">
               Chamuyame
             </h1>
           </div>
-          <p className="text-sm text-gray-500">
-            Subi el screenshot del chat y te chamos que responder
+          <p className="text-sm text-muted-foreground">
+            Pegá la conversación o subi un screenshot del chat
           </p>
         </motion.header>
 
-        <div className="flex flex-col gap-5">
-          <ImageUploader
-            selectedImage={selectedImage}
-            onImageSelected={handleImageSelected}
-          />
+        <div className="space-y-6">
+          <LayoutGroup>
+            <div className="flex flex-row items-stretch gap-5">
+              <motion.div
+                layout
+                transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.9 }}
+                className="relative z-10 flex min-h-0 min-w-0 flex-1 flex-col"
+              >
+                <ChatInput
+                  value={chatText}
+                  onChange={handleChatTextChange}
+                  loadingConversation={isOCRProcessing}
+                  disabled={
+                    isOCRProcessing || state === "processing" || state === "result"
+                  }
+                />
+                {showWarning && (
+                  <div className="text-sm text-muted-foreground m-2">
+                    Puede que sea necesario corregir el contenido de la imagen analizada.
+                  </div>
+                )}
+              </motion.div>
+
+              {showImageUploader && (
+                <>
+                  <div className="shrink-0 self-center text-center text-lg text-muted-foreground">
+                    o
+                  </div>
+                  <motion.div
+                    layout
+                    transition={{
+                      type: "spring",
+                      stiffness: 420,
+                      damping: 34,
+                      mass: 0.9,
+                    }}
+                    className="relative z-10 flex min-h-0 min-w-0 flex-1 flex-col"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.2 }}
+                      className="flex h-full min-h-0 flex-col"
+                    >
+                      <ImageUploader
+                        selectedImage={selectedImage}
+                        onImageSelected={handleImageSelected}
+                      />
+                    </motion.div>
+                  </motion.div>
+                </>
+              )}
+            </div>
+          </LayoutGroup>
 
           <AnimatePresence mode="wait">
-            {(state === "image-selected" || state === "processing" || state === "result") && (
+            {(state === "ready" || state === "processing" || state === "result") && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 className="flex flex-col gap-4"
               >
-                <TextPreview
-                  text={extractedText}
-                  isLoading={isOCRProcessing}
-                />
-
-                {!isOCRProcessing && extractedText && (
+                {!isOCRProcessing && chatText && (
                   <>
+                    <GenderSelector
+                      myGender={myGender}
+                      theirGender={theirGender}
+                      onSelectMyGender={setMyGender}
+                      onSelectTheirGender={setTheirGender}
+                      disabled={state === "processing" || state === "result"}
+                    />
+
+                    <TopicInput
+                      value={topic}
+                      onChange={setTopic}
+                      disabled={state === "processing" || state === "result"}
+                    />
+
                     <ContextInput
                       value={context}
                       onChange={setContext}
                       disabled={state === "processing" || state === "result"}
                     />
 
-                    <ToneSelector
-                      selected={selectedTone}
-                      onSelect={setSelectedTone}
-                      disabled={state === "processing" || state === "result"}
-                    />
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-foreground">
+                        Estilo
+                      </label>
+                      <ToneSelector
+                        selected={selectedTone}
+                        onSelect={setSelectedTone}
+                        disabled={state === "processing" || state === "result"}
+                      />
+                    </div>
 
                     {error && (
                       <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm"
+                        className="rounded-lg border border-destructive-border bg-destructive-bg px-4 py-3 text-sm text-destructive"
                       >
                         {error}
                       </motion.div>
                     )}
 
                     {state !== "result" && (
-                      <motion.button
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
+                      <GradientButton
                         onClick={handleChamuyar}
-                        className="w-full py-3.5 bg-black text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+                        disabled={!myGender || !theirGender}
                       >
-                        Generar respuesta
-                      </motion.button>
+                        {state === "processing" ? "Generando..." : "CHAMUYAR"}
+                      </GradientButton>
                     )}
 
                     <ResponseCard
@@ -186,7 +280,7 @@ export default function Home() {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.5 }}
                         onClick={handleReset}
-                        className="text-gray-400 hover:text-gray-600 transition-colors text-sm py-2 w-full text-center"
+                        className="w-full py-2 text-center text-sm text-muted-foreground transition-colors hover:text-foreground"
                       >
                         Arrancar de nuevo
                       </motion.button>
@@ -202,10 +296,10 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="mt-16 pt-8 border-t border-gray-100 text-center"
+          className="mt-16 border-t border-footer-border pt-8 text-center"
         >
-          <p className="text-xs text-gray-400">
-            Las imagenes nunca salen de tu navegador
+          <p className="text-xs text-muted-foreground">
+            Tus conversaciones no son guardadas.
           </p>
         </motion.footer>
       </div>

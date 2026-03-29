@@ -21,16 +21,16 @@ export default function ResponseCard({
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="w-full bg-black rounded-lg p-6"
+        className="w-full rounded-lg bg-card p-6"
       >
         <div className="flex items-center gap-3">
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
           >
-            <Sparkles className="w-5 h-5 text-white/70" />
+            <Sparkles className="h-5 w-5 text-muted-foreground" />
           </motion.div>
-          <p className="text-sm text-white/80">Pensando...</p>
+          <p className="text-sm text-muted-foreground">Pensando...</p>
         </div>
       </motion.div>
     );
@@ -43,18 +43,20 @@ export default function ResponseCard({
       initial={{ opacity: 0, y: 20, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
-      className="w-full bg-black rounded-lg p-6"
+      className="w-full rounded-lg bg-card p-6"
     >
-      <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="w-4 h-4 text-white/60" />
-        <span className="text-xs text-white/60 uppercase tracking-wide">Respuesta sugerida</span>
+      <div className="mb-4 flex items-center gap-2">
+        <Sparkles className="h-4 w-4 text-muted-foreground" />
+        <span className="text-xs uppercase tracking-wide text-muted-foreground">
+          Respuesta sugerida
+        </span>
       </div>
-      
+
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="text-white text-base leading-relaxed mb-6"
+        className="mb-6 text-base leading-relaxed text-foreground"
       >
         {response}
       </motion.p>
@@ -67,16 +69,16 @@ export default function ResponseCard({
       >
         <button
           onClick={onRegenerate}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-colors"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-muted px-4 py-2.5 text-sm font-medium text-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
         >
-          <RefreshCw className="w-4 h-4" />
+          <RefreshCw className="h-4 w-4" />
           Otra
         </button>
         <button
           onClick={onCopy}
-          className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-white text-black text-sm font-medium hover:bg-gray-100 transition-colors"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90"
         >
-          <Copy className="w-4 h-4" />
+          <Copy className="h-4 w-4" />
           Copiar
         </button>
       </motion.div>

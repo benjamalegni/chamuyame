@@ -36,67 +36,62 @@ export default function ImageUploader({
 
   if (selectedImage) {
     return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="w-full"
-      >
-        <div className="relative rounded-lg overflow-hidden bg-gray-100">
+      <div className="flex h-full min-h-0 w-full flex-col">
+        <div className="relative overflow-hidden rounded-lg bg-muted">
           <img
             src={selectedImage}
             alt="Selected"
             className="w-full h-auto max-h-56 object-contain"
           />
           <button
+            type="button"
             onClick={() => onImageSelected(null as unknown as File)}
-            className="absolute top-2 right-2 w-7 h-7 bg-black/60 hover:bg-black/80 rounded-full flex items-center justify-center transition-colors"
+            className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-foreground/50 transition-colors hover:bg-foreground/70"
+            aria-label="Quitar imagen"
           >
-            <X className="w-4 h-4 text-white" />
+            <X className="h-4 w-4 text-background" />
           </button>
         </div>
-      </motion.div>
+      </div>
     );
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+    <label
+      htmlFor="image-upload"
       onDrop={handleDrop}
       onDragOver={(e) => {
         e.preventDefault();
         setIsDragging(true);
       }}
       onDragLeave={() => setIsDragging(false)}
-      className={`w-full border-2 border-dashed rounded-lg p-10 text-center cursor-pointer transition-all ${
+      className={`flex h-full min-h-[280px] w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed p-8 text-center transition-all ${
         isDragging
-          ? "border-black bg-gray-50"
-          : "border-gray-300 hover:border-gray-400 bg-white"
+          ? "border-primary bg-muted"
+          : "border-border bg-card hover:border-muted-foreground"
       }`}
     >
       <input
         type="file"
         accept="image/*"
         onChange={handleFileChange}
-        className="hidden"
+        className="sr-only"
         id="image-upload"
       />
-      <label htmlFor="image-upload" className="cursor-pointer block">
-        <motion.div
-          animate={isDragging ? { scale: 1.1 } : { scale: 1 }}
-          className="flex justify-center mb-4"
-        >
-          <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
-            <ImagePlus className="w-5 h-5 text-gray-600" />
-          </div>
-        </motion.div>
-        <p className="text-sm font-medium text-gray-900 mb-1">
-          Arrastra una imagen
-        </p>
-        <p className="text-xs text-gray-500">
-          o haz clic para seleccionar
-        </p>
-      </label>
-    </motion.div>
+      <motion.div
+        animate={isDragging ? { scale: 1.1 } : { scale: 1 }}
+        className="mb-4 flex justify-center"
+      >
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-muted">
+          <ImagePlus className="h-5 w-5 text-muted-foreground" />
+        </div>
+      </motion.div>
+      <p className="mb-1 text-sm font-medium text-foreground">
+        Arrastra una imagen
+      </p>
+      <p className="text-xs text-muted-foreground">
+        o haz clic para seleccionar
+      </p>
+    </label>
   );
 }

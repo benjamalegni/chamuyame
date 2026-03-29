@@ -4,7 +4,7 @@ import { chamuyar } from "@/lib/groq";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { textoConversacion, contexto, tono } = body;
+    const { textoConversacion, miGenero, suGenero, tema, contexto, tono } = body;
 
     if (!textoConversacion || typeof textoConversacion !== "string") {
       return NextResponse.json(
@@ -13,9 +13,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!miGenero || (miGenero !== "mujer" && miGenero !== "varon")) {
+      return NextResponse.json(
+        { error: "miGenero es requerido (mujer o varon)" },
+        { status: 400 }
+      );
+    }
+
+    if (!suGenero || (suGenero !== "mujer" && suGenero !== "varon")) {
+      return NextResponse.json(
+        { error: "suGenero es requerido (mujer o varon)" },
+        { status: 400 }
+      );
+    }
+
     const result = await chamuyar({
       textoConversacion,
-      contexto: contexto || "",
+      miGenero,
+      suGenero,
+      tema: tema || undefined,
+      contexto: contexto || undefined,
       tono,
     });
 

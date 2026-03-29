@@ -1,11 +1,104 @@
 @import "tailwindcss";
 
+/* Modo oscuro por defecto — paleta única */
+html {
+  color-scheme: dark;
+}
+
+:root {
+  --background: #000;
+  --foreground: #fff;
+  --card: #101012;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --border: #dddddd;
+  --input: #18181b;
+  --ring: #d4d4d8;
+  --primary: #fafafa;
+  --primary-foreground: #18181b;
+  --accent: #3f3f46;
+  --accent-foreground: #fafafa;
+  --destructive: #fca5a5;
+  --destructive-bg: rgba(127, 29, 29, 0.35);
+  --destructive-border: rgba(248, 113, 113, 0.45);
+  --footer-border: #27272a;
+}
+
 @theme inline {
-  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-sans: var(--font-boldonse), system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-bg: var(--destructive-bg);
+  --color-destructive-border: var(--destructive-border);
+  --color-footer-border: var(--footer-border);
 }
 
 body {
-  font-family: var(--font-inter), system-ui, sans-serif;
+  font-family: var(--font-boldonse), system-ui, sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--muted);
+  color: var(--foreground);
+}
+
+/* Botón con borde gradiente animado */
+.gradient-border-button {
+  position: relative;
+}
+
+.gradient-border-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem; /* rounded-lg */
+  padding: 1.5px;
+  background: linear-gradient(
+    90deg,
+    #06b6d4,
+    #3b82f6,
+    #8b5cf6,
+    #ec4899,
+    #f97316,
+    #06b6d4
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Animación del gradiente rotando */
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-rotate {
+  background-size: 300% 300%;
+  animation: gradient-rotate 4s ease-in-out infinite;
 }
