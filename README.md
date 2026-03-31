@@ -1,42 +1,67 @@
-# Screenshots
+# Capturas
 <img width="1869" height="870" alt="image" src="https://github.com/user-attachments/assets/1dcd3983-2396-418b-aa11-9e8ac2791218" />
 <img width="1884" height="1779" alt="FireShot Capture 005 - Chamuyame - chamuyame chickenkiller com" src="https://github.com/user-attachments/assets/eada5f99-d9e0-451d-95b4-0d0f510b6824" />
 
+# Chamuyame
 
+Generador de respuestas para chats con tono argentino y estilo WhatsApp.
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**Chamuyame** te ayuda a responder una conversación pegando el texto del chat o subiendo una captura de pantalla.  
+Si subís una imagen, la app extrae el texto con OCR y lo usa como base para generar una respuesta.  
+Además, permite elegir estilos de respuesta como **suave**, **atrevido**, **picante**, **romántico** y **divertido**.
 
-## Getting Started
+## Demo
 
-First, run the development server:
+Sitio en producción: [https://chamuyame.chickenkiller.com/](https://chamuyame.chickenkiller.com/)
+
+## Qué hace
+
+- Pegar una conversación manualmente
+- Subir una captura de pantalla del chat
+- Extraer texto de la imagen con OCR
+- Elegir género propio y de la otra persona
+- Agregar tema y contexto opcionales
+- Elegir un estilo de respuesta
+- Editar las instrucciones internas de cada estilo y guardarlas en el navegador
+- Generar una respuesta breve, natural y con voseo argentino
+
+## Stack
+
+- **Next.js 16**
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **Framer Motion**
+- **Lucide React**
+- **Tesseract.js** para OCR
+- **Groq API** para generación de texto
+
+## Cómo funciona
+
+1. El usuario pega una conversación o sube una imagen.
+2. Si hay imagen, se procesa con OCR (`spa+eng`) en el cliente.
+3. La app arma un prompt con:
+   - conversación
+   - géneros seleccionados
+   - tema y contexto
+   - estilo elegido
+   - reglas de lenguaje
+   - ejemplos de tono
+4. Se envía un `POST` a `/api/chamuyar`.
+5. El backend consulta la API de Groq y devuelve una respuesta corta.
+
+## Estructura del proyecto
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+.
+├── app/
+│   ├── api/chamuyar/
+│   └── page.tsx
+├── components/
+├── data/
+├── hooks/
+├── lib/
+├── public/
+├── Dockerfile
+├── docker-compose.yml
+└── ecosystem.config.js
