@@ -1,3 +1,9 @@
+# Screenshots
+<img width="1869" height="870" alt="image" src="https://github.com/user-attachments/assets/1dcd3983-2396-418b-aa11-9e8ac2791218" />
+<img width="1884" height="1779" alt="FireShot Capture 005 - Chamuyame - chamuyame chickenkiller com" src="https://github.com/user-attachments/assets/eada5f99-d9e0-451d-95b4-0d0f510b6824" />
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
